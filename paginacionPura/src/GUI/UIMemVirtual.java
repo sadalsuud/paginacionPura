@@ -4,10 +4,12 @@
  */
 package GUI;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.DefaultListModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -16,9 +18,13 @@ import javax.swing.table.TableModel;
 public class UIMemVirtual extends javax.swing.JFrame {
     
     private ArrayList<String> proceso  ;
-    int cont = 0;
-   // private int cont = 26;
-  
+    private int cont = 0;
+    
+    private SimpleAttributeSet estiloVerde;             // para el marco
+    private SimpleAttributeSet estiloAzul;              // azul para el la pagina
+    private SimpleAttributeSet estiloMorado;            // rojo para ...
+    private SimpleAttributeSet estiloNaranja;          // rojo para el desplazamiento
+   
     /**
      * Crea un nuevo formualario
      */
@@ -26,6 +32,8 @@ public class UIMemVirtual extends javax.swing.JFrame {
         initComponents();
         this.cargarTablas();
         this.procesos();
+        this.jLabel1.setVisible(false);
+        this.crearEstilos();
         
     }
     
@@ -107,8 +115,9 @@ public class UIMemVirtual extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableRAM = new javax.swing.JTable();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPaneTablero = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +134,7 @@ public class UIMemVirtual extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zona de intercambio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 10))); // NOI18N
 
+        jTableZI.setForeground(new java.awt.Color(0, 0, 204));
         jTableZI.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -156,6 +166,7 @@ public class UIMemVirtual extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableZI.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableZI);
         jTableZI.getColumnModel().getColumn(0).setResizable(false);
         jTableZI.getColumnModel().getColumn(1).setResizable(false);
@@ -173,6 +184,7 @@ public class UIMemVirtual extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabla de páginas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 10))); // NOI18N
 
+        jTableTablaDePag.setForeground(new java.awt.Color(153, 0, 153));
         jTableTablaDePag.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -211,6 +223,7 @@ public class UIMemVirtual extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableTablaDePag.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableTablaDePag);
         jTableTablaDePag.getColumnModel().getColumn(0).setResizable(false);
         jTableTablaDePag.getColumnModel().getColumn(1).setResizable(false);
@@ -233,6 +246,7 @@ public class UIMemVirtual extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "RAM", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 10))); // NOI18N
 
+        jTableRAM.setForeground(new java.awt.Color(0, 153, 153));
         jTableRAM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -252,7 +266,10 @@ public class UIMemVirtual extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableRAM.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableRAM);
+        jTableRAM.getColumnModel().getColumn(0).setResizable(false);
+        jTableRAM.getColumnModel().getColumn(1).setResizable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -270,7 +287,10 @@ public class UIMemVirtual extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jScrollPane6.setViewportView(jEditorPane1);
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("Defecto de página");
+
+        jScrollPane4.setViewportView(jTextPaneTablero);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -279,43 +299,43 @@ public class UIMemVirtual extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCrearProceso)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCrearProceso)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButtonCrearProceso)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonCrearProceso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(73, 73, 73)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -323,7 +343,7 @@ public class UIMemVirtual extends javax.swing.JFrame {
 
     private void jButtonCrearProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearProcesoActionPerformed
         // BOTON CREAR PROCESO
- 
+        this.jLabel1.setVisible(false);
         if (!this.proceso.isEmpty() && this.cont < 16) {
             TableModel zi = this.jTableZI.getModel();
             TableModel tabpag = this.jTableTablaDePag.getModel();
@@ -345,10 +365,11 @@ public class UIMemVirtual extends javax.swing.JFrame {
                 int aux = Integer.parseInt((String)tabpag.getValueAt(alt, 0));
                 this.dirVirDirReal(proc, aux, this.cont); 
             }
-            else
+            else{
                 System.out.println("Defecto de página!! D:");
+                this.jLabel1.setVisible(true);
+            }
             this.cont++;
-            System.out.println("contador arriba " + this.cont);
         }
         else{
             System.out.println("se va a limpiar");
@@ -360,18 +381,41 @@ public class UIMemVirtual extends javax.swing.JFrame {
     
     private void dirVirDirReal(String proc, int pag, int marco){
         
+     
+        // Atributos para la frase, en negrita
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        StyleConstants.setBold(attrs, true);
+        // se inserta
+       
+        
         Random desplazamiento = new Random();
         int d = desplazamiento.nextInt(256); 
         String des = Integer.toBinaryString(d);
         String mc = Integer.toBinaryString(marco);
-        System.out.println("pagina que llega " + pag);
-        
+         
         String con = proc+ " " +pag+"-" +des+ " => " +mc+ "-" +des;  
-        DefaultListModel tablero = new DefaultListModel();
-        this.jList1.setModel(tablero);
-        System.out.println("contador " + this.cont);
-        tablero.add(this.cont, con);
-    
+       // this.jTextPaneTablero.setText(con +"\n"+this.jTextPaneTablero.getText());
+        
+        
+        try{
+            jTextPaneTablero.getStyledDocument().insertString(
+        jTextPaneTablero.getStyledDocument().getLength(), proc+" ", attrs);
+            jTextPaneTablero.getStyledDocument().insertString(
+        jTextPaneTablero.getStyledDocument().getLength(), pag+"", this.estiloAzul);
+            jTextPaneTablero.getStyledDocument().insertString(
+        jTextPaneTablero.getStyledDocument().getLength(), des, this.estiloNaranja);
+            jTextPaneTablero.getStyledDocument().insertString(
+        jTextPaneTablero.getStyledDocument().getLength(), " => ", attrs);     
+            jTextPaneTablero.getStyledDocument().insertString(
+        jTextPaneTablero.getStyledDocument().getLength(), mc, this.estiloVerde);
+            jTextPaneTablero.getStyledDocument().insertString(
+        jTextPaneTablero.getStyledDocument().getLength(), des+"\n", this.estiloNaranja);
+            
+        
+        }catch(Exception e){
+            System.out.println("problemas");
+        }
+        
     
     }
     
@@ -380,13 +424,30 @@ public class UIMemVirtual extends javax.swing.JFrame {
         for(int i = 0; i < 16; i++){
             this.jTableZI.getModel().setValueAt(null, i, 1);
             this.jTableTablaDePag.getModel().setValueAt(0, i, 1);
-            this.jTableTablaDePag.getModel().setValueAt("", i, 2);
+            this.jTableTablaDePag.getModel().setValueAt("", i, 3);
         }
         this.procesos();
         this.cont = 0; 
         for(int i = 0; i < 4; i++)
             this.jTableRAM.getModel().setValueAt("", i, 0);         
     }
+    
+    private void crearEstilos() {
+
+        this.estiloMorado = new SimpleAttributeSet();
+        StyleConstants.setForeground(estiloMorado, new Color(153,0,153));
+       
+        this.estiloAzul = new SimpleAttributeSet();
+        StyleConstants.setForeground(estiloAzul, new Color(0,0,204));
+
+        this.estiloVerde = new SimpleAttributeSet();
+        StyleConstants.setForeground(estiloVerde, new Color(0,153,153)); 
+
+        this.estiloNaranja = new SimpleAttributeSet();
+        StyleConstants.setForeground(estiloNaranja, Color.ORANGE); 
+    }
+    
+    
     
     /**
      * @param args argumentos de la línea de comandos
@@ -431,18 +492,19 @@ public class UIMemVirtual extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearProceso;
-    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTableRAM;
     private javax.swing.JTable jTableTablaDePag;
     private javax.swing.JTable jTableZI;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextPane jTextPaneTablero;
     // End of variables declaration//GEN-END:variables
 }
